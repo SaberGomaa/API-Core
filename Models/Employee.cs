@@ -1,4 +1,6 @@
-﻿namespace API_Core.Models
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace API_Core.Models
 {
     public class Employee
     {
@@ -11,6 +13,11 @@
 
         public DateTime BirthDate { get; set; }
         public string Phone { get; set; }
+
+        public int DepartmentId { get; set; }
+
+        [ForeignKey("DepartmentId")]
+        public Department Department { get; set; }
 
     }
 }

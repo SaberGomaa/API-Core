@@ -15,6 +15,8 @@ namespace API_Core.Models
             base.OnConfiguring(optionsBuilder);
         }
 
-        public DbSet<Employee> employees { get; set; } = null!;
+        public DbSet<Employee> employees { get; set; }
+        public DbSet<Department> departments { get; set; }
+
     }
 }

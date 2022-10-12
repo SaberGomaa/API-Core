@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API_Core.Migrations
 {
     [DbContext(typeof(myContext))]
-    [Migration("20221012084525_create")]
+    [Migration("20221012175457_create")]
     partial class create
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -23,6 +23,27 @@ namespace API_Core.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
+
+            modelBuilder.Entity("API_Core.Models.Department", b =>
+                {
+                    b.Property<int>("DepartmentId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("DepartmentId"), 1L, 1);
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("DepartmentId");
+
+                    b.ToTable("departments");
+                });
 
             modelBuilder.Entity("API_Core.Models.Employee", b =>
                 {
@@ -42,6 +63,9 @@ namespace API_Core.Migrations
                     b.Property<DateTime>("BirthDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("DepartmentId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -56,7 +80,25 @@ namespace API_Core.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("DepartmentId");
+
                     b.ToTable("employees");
+                });
+
+            modelBuilder.Entity("API_Core.Models.Employee", b =>
+                {
+                    b.HasOne("API_Core.Models.Department", "Department")
+                        .WithMany("employees")
+                        .HasForeignKey("DepartmentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Department");
+                });
+
+            modelBuilder.Entity("API_Core.Models.Department", b =>
+                {
+                    b.Navigation("employees");
                 });
 #pragma warning restore 612, 618
         }
