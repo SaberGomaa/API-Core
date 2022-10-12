@@ -1,3 +1,6 @@
+using API_Core.Models;
+using Microsoft.EntityFrameworkCore;
+
 namespace API_Core
 {
     public class Program
@@ -9,6 +12,8 @@ namespace API_Core
             // Add services to the container.
 
             builder.Services.AddControllers();
+            builder.Services.AddDbContext<myContext>(opt => opt.UseInMemoryDatabase("Employee"));
+
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
@@ -18,9 +23,12 @@ namespace API_Core
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
-                app.UseSwagger();
-                app.UseSwaggerUI();
+                app.UseDeveloperExceptionPage();
+                //app.UseSwagger();
+                //app.UseSwaggerUI();
             }
+
+            app.UseHttpsRedirection();
 
             app.UseAuthorization();
 
