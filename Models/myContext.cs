@@ -6,8 +6,7 @@ namespace API_Core.Models
     {
         public myContext(DbContextOptions<myContext> options)
             : base(options)
-        {
-        }
+        {}
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

@@ -10,9 +10,11 @@ namespace API_Core
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
-
+           builder.Services.AddControllersWithViews().AddNewtonsoftJson(options =>
+           options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+           );
             builder.Services.AddControllers();
-            builder.Services.AddDbContext<myContext>(opt => opt.UseSqlServer("Employee"));
+            builder.Services.AddDbContext<myContext>(opt => opt.UseSqlServer("myContext"));
 
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();

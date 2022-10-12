@@ -1,4 +1,5 @@
 ﻿using MessagePack;
+using Newtonsoft.Json;
 
 namespace API_Core.Models
 {
@@ -8,6 +9,7 @@ namespace API_Core.Models
         public string Name { get; set; }
         public string Description { get; set; }
 
+        [JsonIgnore]
         public ICollection<Employee> employees { get; set; }
     }
 }
