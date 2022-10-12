@@ -12,7 +12,7 @@ namespace API_Core
             // Add services to the container.
 
             builder.Services.AddControllers();
-            builder.Services.AddDbContext<myContext>(opt => opt.UseInMemoryDatabase("Employee"));
+            builder.Services.AddDbContext<myContext>(opt => opt.UseSqlServer("Employee"));
 
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
