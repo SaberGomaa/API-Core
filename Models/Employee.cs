@@ -1,4 +1,4 @@
-﻿namespace API_Core
+﻿namespace API_Core.Models
 {
     public class Employee
     {
@@ -7,7 +7,7 @@
         public string Email { get; set; }
 
         public int Age { get; set; }
-        public string  Address { get; set; }
+        public string Address { get; set; }
 
         public DateTime BirthDate { get; set; }
         public string Phone { get; set; }
